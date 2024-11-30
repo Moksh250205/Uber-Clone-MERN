@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const CaptainLogin = () => {
+    const navigate = useNavigate(); 
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -15,8 +17,17 @@ const CaptainLogin = () => {
         }))
     }
 
-    const handleSUbmit = (e) => {
+    const handleSUbmit = async (e) => {
         e.preventDefault();
+
+        try {
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/captain/login`, formData); 
+            console.log(response.data.captain); 
+            localStorage.setItem('token', response.data.token); 
+            navigate('/');
+        } catch (error) {
+            console.log(error); 
+        }
     }
 
     const { email, password } = formData;

@@ -1,8 +1,8 @@
 const User = require('../models/user.model');
 
 const register = async (userData) => {
-    const {first_name, last_name, contact_number, email, password } = userData; 
-    if(!first_name || !last_name || !contact_number || !email || !password){
+    const {first_name, last_name, email, password } = userData; 
+    if(!first_name || !last_name  || !email || !password){
         throw new Error("All data is required"); 
     }
 
@@ -17,8 +17,7 @@ const register = async (userData) => {
             last_name
         }, 
         email, 
-        password,
-        contact_number,  
+        password, 
     }); 
     await user.save();
     

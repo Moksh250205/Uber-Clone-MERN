@@ -1,11 +1,15 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useState, useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
+import { userDataContext } from '../context/userContext';
+import axios from 'axios';
 
 const UserLogin = () => {
+    const navigate = useNavigate(); 
     const [formData, setFormData] = useState({
         email: '', 
         password: '',
-    }); 
+    });
+    const {user , setUser} = useContext(userDataContext); 
 
     const handleChange = ((e) => {
         const {name, value} = e.target; 
@@ -15,8 +19,18 @@ const UserLogin = () => {
         }));
     });
 
-    const handleSUbmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault(); 
+        
+        try {
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/login`, formData);
+            const userData = response.data.user;   
+            setUser(userData);
+            localStorage.setItem('token', response.data.token); 
+             navigate('/')
+        } catch (error) {
+            console.error("Error logging in", error); 
+        }
     }
 
     const {email , password} = formData; 
@@ -24,7 +38,7 @@ const UserLogin = () => {
     return (
         <div className='p-7 h-screen w-screen flex justify-between flex-col'>
             <div>
-                <form action="" onSubmit={handleSUbmit}>
+                <form action="" onSubmit={handleSubmit}>
                     <img className='w-16 mb-10' src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="" />
                     <h3 className='text-xl mb-2'>What's your email</h3>
 

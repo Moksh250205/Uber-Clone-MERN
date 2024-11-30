@@ -25,16 +25,6 @@ const userSchema = new mongoose.Schema({
         required: true,
         select: false,
     },
-    contact_number: {
-        type: Number,
-        required: true,
-        validate: {
-            validator: function(v) {
-                return /^\d{10}$/.test(v.toString());
-            },
-            message: props => `${props.value} is not a valid phone number!`,
-        },
-    },
     socketId: {
         type: String,
         default: null,

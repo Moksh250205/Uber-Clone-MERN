@@ -1,6 +1,7 @@
 const Captain = require('../models/captain.model');
 
 const register = async (captainData) => {
+    console.log(captainData); 
     const {first_name, last_name, contact_number, email, password, vehicle} = captainData; 
     if(!first_name || !last_name || !contact_number || !email || !password || !vehicle){
         throw new Error("All data is required"); 

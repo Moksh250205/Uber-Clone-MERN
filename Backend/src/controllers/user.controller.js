@@ -26,7 +26,8 @@ exports.loginUser = async (req,res) => {
         const user = await userService.login(userData);
         const token = user.generateAuthToken();
         res.cookie('token', token);
-        res.status(200).json({user, token}); 
+        console.log(user.email); 
+        res.status(200).json({user, token, message: `userData sent ${user.email}`}); 
     } catch (error) {
         res.status(400).json({error: error.message}); 
     }
