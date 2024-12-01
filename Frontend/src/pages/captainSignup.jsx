@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { captainDataContext } from '../context/captainContext';
 
 const CaptainSignup = () => {
-
+  const {captain, setCaptain} = useContext(captainDataContext); 
   const navigate = useNavigate(); 
   const [formData, setFormData] = useState({
     first_name: '',
@@ -44,8 +45,9 @@ const CaptainSignup = () => {
 
     try {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/captain/register`, formData);
-      console.log(response.data.captain);
-      navigate('/');
+      setCaptain(response.data.captain); 
+      localStorage.setItem('captainToken', response.data.token); 
+      navigate('/captain-home');
     } catch (error) {
       console.error(error); 
     }

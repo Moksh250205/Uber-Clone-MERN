@@ -28,7 +28,7 @@ const UserSignup = () => {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/register`, formData); 
       setUser(response.data.user); 
       localStorage.setItem('token', response.data.token); 
-      navigate('/'); 
+      navigate('/home'); 
     } catch (error) {
       console.error('Error during registration:', error);
     } 

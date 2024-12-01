@@ -34,6 +34,7 @@ exports.loginCaptain= async (req,res) => {
 }
 
 exports.getCaptainProfile = async (req, res) => {
+    console.log(req.captain); 
     res.status(200).json({ captain: req.captain });
 }
 

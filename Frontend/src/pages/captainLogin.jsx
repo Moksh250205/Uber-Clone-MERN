@@ -1,8 +1,10 @@
-import React, {useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { Link,useNavigate } from 'react-router-dom';
+import { captainDataContext } from '../context/captainContext';
 import axios from 'axios';
 
 const CaptainLogin = () => {
+    const {captain, setCaptain} = useContext(captainDataContext); 
     const navigate = useNavigate(); 
     const [formData, setFormData] = useState({
         email: '',
@@ -21,10 +23,10 @@ const CaptainLogin = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/captain/login`, formData); 
-            console.log(response.data.captain); 
-            localStorage.setItem('token', response.data.token); 
-            navigate('/');
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/captain/login`, formData);
+            setCaptain(response.data.captain); 
+            localStorage.setItem('captainToken', response.data.token); 
+            navigate('/captain-home');
         } catch (error) {
             console.log(error); 
         }
