@@ -2,9 +2,10 @@ import React, { useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 
-const CaptainProtectWrapper = ({children}) => {
+const CaptainProtectWrapper = ({children, path}) => {
     const token = localStorage.getItem('captainToken'); 
     const navigate = useNavigate(); 
+    console.log(token); 
 
     useEffect(() => {
         if(token){
@@ -14,9 +15,8 @@ const CaptainProtectWrapper = ({children}) => {
                         Authorization: `Bearer ${token}`
                     }
                 }); 
-                console.log(isValid.captain); 
                 if(isValid.status == 200){
-                    navigate('/captain-home'); 
+                    navigate(path); 
                 }
                 else{
                     navigate('/captain-login'); 
