@@ -14,6 +14,7 @@ app.use(express.json());
 
 app.use("/api/user", require("./src/routes/user.route")); 
 app.use("/api/captain", require("./src/routes/captain.route"));
+app.use("/api/maps", require('./src/routes/maps.route'));
 
 app.get('/', (req, res) =>{
     res.send('Hello World')
