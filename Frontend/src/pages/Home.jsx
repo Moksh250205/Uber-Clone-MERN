@@ -69,10 +69,9 @@ const Home = () => {
     });
 
     socket.on('ride-started', (ride) => {
-      console.log("from home", ride);
       setRide(ride);
       navigate('/riding', { state: { ride, vehicleUrl } });
-    })
+    }); 
   }, []);
 
   const handlePickupChange = async (e) => {
@@ -143,8 +142,6 @@ const Home = () => {
       });
       console.log("ride created: ", response.data);
       setOtp(response.data.data.otp);
-      console.log(response.data.data.otp);
-      console.log(otp);
       setRide(response.data);
     } catch (error) {
       console.error(error);

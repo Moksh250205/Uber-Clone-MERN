@@ -2,7 +2,6 @@ import { MapPin, WalletCards, ChevronDown } from 'lucide-react'
 import React from 'react'
 
 const ConfirmRidePanel = ({ setConfirmRidePanel, rideConfirmation, setRideConfirmation, vehicleUrl, destination, pickup, vehicleType, fare, createRide }) => {
-    console.log(vehicleType, fare)
     return (
         <div className='bg-white pt-2'>
             <ChevronDown onClick={() => {

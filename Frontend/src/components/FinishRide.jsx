@@ -33,7 +33,6 @@ const FinishRide = ({ setFinishRidePanel, ride }) => {
 
             if (response.data.success) {
                 localStorage.removeItem('ongoingRideCaptain');
-                console.log("Ride successfully finished");
                 
                 navigate('/captain-home'); 
             } else {

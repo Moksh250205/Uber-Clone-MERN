@@ -5,7 +5,6 @@ const LocationSearchPanel = ({ suggestions, setFormData, setLocationPanelOpen, a
   if (!Array.isArray(suggestions)) {
     return <div className='text-center w-screen '>No suggestions available.</div>;
   }
-  console.log(suggestions)
 
   const handleSuggestionClick = (suggestion) => {
     setFormData((prev) => ({

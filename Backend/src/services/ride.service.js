@@ -150,8 +150,6 @@ exports.startRide = async (rideData, captainId) => {
         throw new Error('Invalid OTP');
     }
 
-    console.log(ride); 
-
     ride.status = 'ongoing';
     await ride.save();
 

@@ -34,8 +34,6 @@ function initializeSocket(server){
             if(!location || !captainId || !location.lng || !location.ltd){
                 return socket.emit('error', {message: "Invalid data"}); 
             }
-
-            console.log("Request sent"); 
             
             await captainModel.findByIdAndUpdate(captainId, {location: {
                 ltd: location.ltd, 

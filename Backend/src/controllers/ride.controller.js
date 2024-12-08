@@ -76,7 +76,7 @@ exports.confirmRideController = async (req, res) => {
         res.status(200).json({
             success: true,
             message: 'Ride Confirmed',
-            data: rideData
+            data: ride
         });  
     } catch (error) {
         console.log(error); 
@@ -108,7 +108,6 @@ exports.startRideController = async (req, res) => {
 exports.endRideController = async (req, res) => {
     const rideData = req.query; 
     const captainId = req.captain._id; 
-    console.log(rideData, captainId); 
     try {
         const ride = await rideService.endRide(rideData, captainId);
         sendMessageToSocketId(ride.user.socketId, {

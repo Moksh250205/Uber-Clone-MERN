@@ -19,7 +19,6 @@ exports.registerCaptain = async (req, res) => {
 
 exports.loginCaptain= async (req,res) => {
     const captainData = req.body; 
-    console.log(captainData); 
     if(!captainData){
         return res.status(400).json("No data found"); 
     }
@@ -34,7 +33,6 @@ exports.loginCaptain= async (req,res) => {
 }
 
 exports.getCaptainProfile = async (req, res) => {
-    console.log(req.captain); 
     res.status(200).json({ captain: req.captain });
 }
 

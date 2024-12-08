@@ -22,7 +22,6 @@ const RouteTracking = ({ destinationAddress, caller }) => {
       (position) => {
         const { latitude, longitude } = position.coords;
         setCurrentPosition({ lat: latitude, lng: longitude });
-        console.log(position.coords);
       },
       (error) => {
         console.error('Error tracking location:', error);

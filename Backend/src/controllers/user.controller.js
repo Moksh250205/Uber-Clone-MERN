@@ -18,7 +18,6 @@ exports.registerUser = async (req, res) => {
 
 exports.loginUser = async (req,res) => {
     const userData = req.body; 
-    console.log(userData); 
     if(!userData){
         return res.status(400).json("No data found"); 
     }

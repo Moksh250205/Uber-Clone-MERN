@@ -51,8 +51,6 @@ const ConfirmRidePopupPanel = ({ setConfirmRidePopupPanel, ride, setRide }) => {
     }
   }, [ride]);
 
-  console.log(ride);
-
   return (
     <div>
       <h5 className="p-1 text-center w-[93%] absolute top-0">

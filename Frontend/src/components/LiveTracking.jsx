@@ -3,7 +3,7 @@ import { LoadScript, GoogleMap, Marker } from '@react-google-maps/api';
 
 const containerStyle = {
   width: '100%',
-  height: '100%', // Adjust height as needed
+  height: '100%', 
 };
 
 const initialCenter = {
@@ -19,7 +19,6 @@ const LiveTracking = () => {
       (position) => {
         const { latitude, longitude } = position.coords;
         setCurrentPosition({ lat: latitude, lng: longitude });
-        console.log(position.coords); 
       },
       (error) => {
         console.error('Error tracking location:', error);
