@@ -1,28 +1,19 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 
 export const captainDataContext = createContext(); 
 
 const CaptainContext = ({children}) => {
 
-    const [captain, setCaptain] = useState({
-        full_name: {
-          first_name: '',
-          last_name: ''
-        },
-        vehicle: {
-          color: '',
-          plate: '',
-          capacity: 0,
-          vehicleType: '',
-          model: ''
-        },
-        _id: '',
-        email: '',
-        contact_number: '',
-        socketId: null,
-        status: '',
-        __v: 0
-      });
+  const storedCaptain = localStorage.getItem('captain');
+  const initialCaptain = storedCaptain ? JSON.parse(storedCaptain) : null;
+
+  const [captain, setCaptain] = useState(initialCaptain);
+  
+  useEffect(() => {
+    if (captain) {
+      localStorage.setItem('captain', JSON.stringify(captain));
+    }
+  }, [captain]);
 
   return (
     <div>

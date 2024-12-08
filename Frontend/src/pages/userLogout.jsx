@@ -8,7 +8,7 @@ const UserLogout = () => {
         const logout = async () => {
             const token = localStorage.getItem('token');
             try {
-                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/captain/logout`, {
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/user/logout`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -16,6 +16,7 @@ const UserLogout = () => {
 
                 if (response.status == 200) {
                     localStorage.removeItem('token');
+                    localStorage.removeItem('user'); 
                     navigate('/login'); 
                 }
 

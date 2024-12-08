@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { userDataContext } from '../context/userContext';
 import axios from 'axios';
+import { useEffect } from 'react';
 
 const UserLogin = () => {
     const navigate = useNavigate(); 
@@ -9,6 +10,7 @@ const UserLogin = () => {
         email: '', 
         password: '',
     });
+
     const {user , setUser} = useContext(userDataContext); 
 
     const handleChange = ((e) => {
@@ -21,12 +23,13 @@ const UserLogin = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault(); 
-        
+
         try {
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/login`, formData);
             const userData = response.data.user;   
             setUser(userData);
             localStorage.setItem('token', response.data.token); 
+            localStorage.setItem('user', JSON.stringify(response.data.user)); 
             navigate('/home')
         } catch (error) {
             console.error("Error logging in", error); 

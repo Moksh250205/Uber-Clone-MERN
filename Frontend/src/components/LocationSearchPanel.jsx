@@ -1,28 +1,41 @@
 import React from 'react';
 import { MapPin } from 'lucide-react';
 
-const LocationSearchPanel = ({ setVehiclePanel, setLocationPanelOpen}) => {
-  const locations = [
-    'New York, NY',
-    'Los Angeles, CA',
-    'Chicago, IL',
-    'Houston, TX',
-    'San Francisco, CA',
-  ];
+const LocationSearchPanel = ({ suggestions, setFormData, setLocationPanelOpen, activeField }) => {
+  if (!Array.isArray(suggestions)) {
+    return <div className='text-center w-screen '>No suggestions available.</div>;
+  }
+  console.log(suggestions)
+
+  const handleSuggestionClick = (suggestion) => {
+    setFormData((prev) => ({
+      ...prev,
+      [activeField]: suggestion, // Set the appropriate field (pickup or destination)
+    }));
+  };
 
   return (
-    <div className="p-4 bg-white shadow-md">
-      <ul className="space-y-3">
-        {locations.map((location, key) => (
-            <li key={key} onClick={(() => {
-                setVehiclePanel(true);
-                setLocationPanelOpen(false); 
-            })} className='flex items-center gap-3 bg-white p-5 rounded-md hover:bg-gray-50 cursor-pointer'>
-                <MapPin className="text-black" size={20} />
-                <span className='text-gray-800'>{location}</span> 
-            </li>
-        ))}
-      </ul>
+    <div className="space-y-2">
+      {suggestions.length > 0 ? (
+        suggestions.map((elem, idx) => (
+          <div
+            key={idx}
+            onClick={() => handleSuggestionClick(elem)}
+            className="flex items-center gap-4 border-2 p-4 rounded-xl hover:border-black transition-all"
+          >
+            {/* Icon Container */}
+            <div className="flex items-center justify-center bg-[#eee] h-12 w-12 rounded-full">
+              <MapPin className="text-gray-600" size={20} />
+            </div>
+            {/* Suggestion Text */}
+            <div className="flex-1">
+              <h4 className="text-base font-medium text-gray-800">{elem}</h4>
+            </div>
+          </div>
+        ))
+      ) : (
+        <div className="text-gray-500 text-center">No suggestions available.</div>
+      )}
     </div>
   );
 };

@@ -29,12 +29,11 @@ exports.getDistanceTime = async (req, res) => {
 }
 
 exports.getAutoCompleteSuggestions = async (req, res) => {
-
     try {
         const { input } = req.query;
 
         const suggestions = await mapService.getAutoCompleteSuggestions(input);
-
+        console.log(suggestions); 
         res.status(200).json(suggestions);
     } catch (err) {
         console.error(err);

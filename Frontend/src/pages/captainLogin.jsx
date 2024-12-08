@@ -26,6 +26,7 @@ const CaptainLogin = () => {
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/captain/login`, formData);
             setCaptain(response.data.captain); 
             localStorage.setItem('captainToken', response.data.token); 
+            localStorage.setItem('captain', JSON.stringify(response.data.captain)); 
             navigate('/captain-home');
         } catch (error) {
             console.log(error); 
