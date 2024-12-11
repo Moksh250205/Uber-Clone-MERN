@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { userDataContext } from '../context/userContext';
 import axios from 'axios';
-import { useEffect } from 'react';
 
 const UserLogin = () => {
     const navigate = useNavigate(); 

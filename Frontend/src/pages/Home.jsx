@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import React, { useState, useRef, useEffect, useContext, useCallback  } from 'react';
 import { MapPin, Navigation, ArrowDown } from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -109,6 +109,31 @@ const Home = () => {
     } catch (error) {
       setDestinationSuggestions([]);
     }
+  };
+
+  const debounce = (func, delay) => {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func(...args), delay);
+    };
+  };
+  
+  const debouncedPickupChange = useCallback(debounce(handlePickupChange, 300), []);
+  const debouncedDestinationChange = useCallback(debounce(handleDestinationChange, 300), []);
+
+  const onPickupInputChange = (e) => {
+    const value = e.target.value;
+    setFormData((prev) => ({ ...prev, pickup: value }));
+    setActiveField('pickup');
+    debouncedPickupChange(value);
+  };
+
+  const onDestinationInputChange = (e) => {
+    const value = e.target.value;
+    setFormData((prev) => ({ ...prev, destination: value }));
+    setActiveField('destination');
+    debouncedDestinationChange(value);
   };
 
   async function findTrip() {
@@ -234,7 +259,7 @@ const Home = () => {
               <MapPin className="absolute left-4 text-gray-600 mt-4" size={20} />
               <input
                 onClick={() => setLocationPanelOpen(true)}
-                onChange={handlePickupChange}
+                onChange={onPickupInputChange}
                 name="pickup"
                 value={pickup}
                 className="bg-[#eee] px-12 py-2 text-lg rounded-lg w-full mt-4 p-5"
@@ -247,7 +272,7 @@ const Home = () => {
               <Navigation className="absolute left-4 text-gray-600 mb-4" size={20} />
               <input
                 onClick={() => setLocationPanelOpen(true)}
-                onChange={handleDestinationChange}
+                onChange={onDestinationInputChange}
                 name="destination"
                 value={destination}
                 className="bg-[#eee] px-12 py-2 text-lg rounded-lg w-full mb-4 p-5"

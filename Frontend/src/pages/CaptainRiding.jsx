@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import FinishRide from '../components/FinishRide';
-import LiveTracking from '../components/LiveTracking';
 import RouteTracking from '../components/RouteTracking';
 
 const CaptainRiding = () => {
