@@ -50,7 +50,6 @@ const Home = () => {
   const { user } = useContext(userDataContext);
 
   useEffect(() => {
-    console.log(user);
     socket.emit('join', { userType: 'user', userId: user._id })
   }, [user]);
 
@@ -74,8 +73,7 @@ const Home = () => {
     }); 
   }, []);
 
-  const handlePickupChange = async (e) => {
-    const value = e.target.value;
+  const handlePickupChange = async (value) => {
     if (value === '') return;
     setFormData((prev) => ({ ...prev, pickup: value }));
     setActiveField('pickup');
@@ -93,8 +91,7 @@ const Home = () => {
     }
   };
 
-  const handleDestinationChange = async (e) => {
-    const value = e.target.value;
+  const handleDestinationChange = async (value) => {
     if (value === '') return;
     setFormData((prev) => ({ ...prev, destination: value }));
     setActiveField('destination');
@@ -165,7 +162,6 @@ const Home = () => {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
       });
-      console.log("ride created: ", response.data);
       setOtp(response.data.data.otp);
       setRide(response.data);
     } catch (error) {
